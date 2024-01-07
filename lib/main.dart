@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trivia_app/screens/result_screen.dart';
 
-import 'models/anotherone.dart';
+import 'screens/quiz_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,9 +36,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String userName = '';
 
-  void _incrementCounter() {
-    setState(() {});
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -80,20 +77,6 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(height: 20),
-            // ElevatedButton(
-            //   onPressed: userName.isNotEmpty
-            //       ? () {
-
-            //           Navigator.push(
-            //             context,
-            //             MaterialPageRoute(
-            //                 builder: (context) => QuizScreen()),
-            //           );
-            //           print('Start button pressed');
-            //         }
-            //       : null,
-            //   child: Text('Start'),
-            // ),
             ElevatedButton(
               onPressed: () {
                 if (userName.trim().length >= 3 &&

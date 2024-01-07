@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-// import 'quiz_questions.dart';
-
 class Trivia {
   String? category;
   String? id;
@@ -92,25 +90,3 @@ class ApiCalling {
     return list;
   }
 }
-
-
-// //chatgpt modified it idk what's different
-// class ApiCalling {
-//   String url = "https://the-trivia-api.com/v2/questions";
-
-//   Future<List<QuizQuestion>> getData() async {
-//     List<QuizQuestion> list = [];
-//     http.Response response = await http.get(Uri.parse(url));
-//     if (response.statusCode == 200 ||
-//         response.statusCode == 201 ||
-//         response.statusCode == 202) {
-//       var body = response.body;
-//       var jsonBody = jsonDecode(body);
-//       jsonBody.forEach((element) {
-//         list.add(QuizQuestion.fromTrivia(Trivia.fromJson(element)));
-//       });
-//       return list;
-//     }
-//     return list;
-//   }
-// }
