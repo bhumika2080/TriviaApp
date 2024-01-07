@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import 'question_model.dart';
 
 class QuizScreen extends StatefulWidget {
@@ -93,17 +91,6 @@ class _QuizScreenState extends State<QuizScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if (triviaList == null) {
-      return Scaffold(
-        appBar: AppBar(
-          title: Text('Trivia Quiz App'),
-        ),
-        body: Center(
-          child: CircularProgressIndicator(),
-        ),
-      );
-    }
-
     if (currentQuestionIndex >= triviaList.length) {
       return Scaffold(
         appBar: AppBar(
