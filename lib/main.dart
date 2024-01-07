@@ -11,16 +11,15 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: ''),
     );
   }
 }
@@ -36,7 +35,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   String userName = '';
 
-
   @override
   Widget build(BuildContext context) {
     final isKeyboard = MediaQuery.of(context).viewInsets.bottom != 0;
@@ -51,12 +49,15 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             if (!isKeyboard)
               CircleAvatar(
-                radius: 50,
+                radius: 100,
                 backgroundColor: Colors.blue,
-                child: Icon(
-                  Icons.person,
-                  size: 60,
-                  color: Colors.white,
+                child: Text(
+                  'Quiz',
+                  style: TextStyle(
+                    fontSize: 70,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
             SizedBox(height: 20),
@@ -100,7 +101,6 @@ class _MyHomePageState extends State<MyHomePage> {
               },
               child: Text('Start Quiz'),
             ),
-
             SizedBox(height: 10),
             ElevatedButton(
               onPressed: userName.isNotEmpty
