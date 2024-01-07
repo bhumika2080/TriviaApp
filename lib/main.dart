@@ -80,32 +80,69 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             SizedBox(height: 20),
+            // ElevatedButton(
+            //   onPressed: userName.isNotEmpty
+            //       ? () {
+
+            //           Navigator.push(
+            //             context,
+            //             MaterialPageRoute(
+            //                 builder: (context) => QuizScreen()),
+            //           );
+            //           print('Start button pressed');
+            //         }
+            //       : null,
+            //   child: Text('Start'),
+            // ),
             ElevatedButton(
-              onPressed: userName.isNotEmpty
-                  ? () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => QuizScreen()),
-                      );
-                      print('Start button pressed');
-                    }
-                  : null,
-              child: Text('Start'),
+              onPressed: () {
+                if (userName.trim().length >= 3 &&
+                    RegExp(r'^[a-zA-Z]+$').hasMatch(userName.trim())) {
+                  // Valid username
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => QuizScreen()),
+                  );
+                  print('Start button pressed');
+                } else {
+                  // Invalid username
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                          'Invalid username. Please enter at least 3 alphabetical characters.'),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              },
+              child: Text('Start Quiz'),
             ),
+
             SizedBox(height: 10),
             ElevatedButton(
               onPressed: userName.isNotEmpty
                   ? () {
-                      setUserName(userName);
-                      print('Username set: $userName');
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const ResultScreen()),
-                      );
-                      // Add logic for the "Show Result" button
-                      print('Show Result button pressed');
+                      if (userName.trim().length >= 3 &&
+                          RegExp(r'^[a-zA-Z]+$').hasMatch(userName.trim())) {
+                        // Valid username
+                        setUserName(userName);
+                        print('Username set: $userName');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ResultScreen()),
+                        );
+                        print('Show Result button pressed');
+                      } else {
+                        // Invalid username
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(
+                                'Invalid username. Please enter at least 3 alphabetical characters.'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                      }
                     }
                   : null,
               child: Text('Show Result'),
@@ -121,4 +158,3 @@ class _MyHomePageState extends State<MyHomePage> {
     pref.setString('usersname', userNameValue);
   }
 }
-

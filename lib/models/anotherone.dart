@@ -31,14 +31,12 @@ class _QuizScreenState extends State<QuizScreen> {
     }
   }
 
-  // void shuffleOptions() {
-  //   for (var question in triviaList) {
-  //     var options = List<String>.from(question.incorrectAnswers!);
-  //     options.add(question.correctAnswer!);
-  //     options.shuffle();
-  //     question.incorrectAnswers = options.sublist(0, 1); // Keep only one correct answer
-  //   }
-  // }
+  Widget buildLoading() {
+    return Center(
+      child: CircularProgressIndicator(),
+    );
+  }
+
   void shuffleOptions() {
     var currentQuestion = triviaList[currentQuestionIndex];
     var options = List<String>.from(currentQuestion.incorrectAnswers!);
@@ -49,7 +47,7 @@ class _QuizScreenState extends State<QuizScreen> {
     currentQuestion.incorrectAnswers = options;
   }
 
-  Future<void> checkAnswer(String selectedAnswer) async{
+  Future<void> checkAnswer(String selectedAnswer) async {
     if (answered) return;
 
     setState(() {
@@ -60,11 +58,15 @@ class _QuizScreenState extends State<QuizScreen> {
     String correctAnswer = currentQuestion.correctAnswer!;
 
     //shared preference
+    bool isCorrect = selectedAnswer == correctAnswer;
 
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> selectedOptions = prefs.getStringList('selected_options') ?? [];
+    List<String> selectedOptions =
+        prefs.getStringList('selected_options') ?? [];
 
-    selectedOptions.add(selectedAnswer);
+    // selectedOptions.add(selectedAnswer);
+    selectedOptions
+        .add('$selectedAnswer - ${isCorrect ? 'Correct' : 'Incorrect'}');
 
     prefs.setStringList('selected_options', selectedOptions);
 

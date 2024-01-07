@@ -64,91 +64,89 @@
 //   }
 // }
 
-// // user ko result pani dekhauna ko lagi, displays username, answers and clear data button
-
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:trivia_app/main.dart';
-
-class ResultScreen extends StatefulWidget {
-  const ResultScreen({Key? key}) : super(key: key);
-
-  @override
-  State<ResultScreen> createState() => _ResultScreenState();
-}
-
-class _ResultScreenState extends State<ResultScreen> {
-  String? userNameDisplay;
-  String resultDisplay = '';
-
-  @override
-  void initState() {
-    super.initState();
-    getUserName();
-    getStringList();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            userNameDisplay == null
-                ? Text('Take the quiz first')
-                : Text(userNameDisplay!),
-            resultDisplay.isEmpty
-                ? Text('There was an error when showing your results')
-                : Text(resultDisplay),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: clearData,
-              child: Text('Clear Data'),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  void getUserName() async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    userNameDisplay = pref.getString('usersname');
-    setState(() {
-      userNameDisplay = pref.getString('usersname');
-    });
-  }
-
-  void getStringList() async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    List<String>? selectedOptions = pref.getStringList('selected_options');
-    resultDisplay = selectedOptions?.join(', ') ?? '';
-    setState(() {
-      resultDisplay = selectedOptions?.join(', ') ?? '';
-    });
-  }
-
-  void clearData() async {
-    final SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.clear(); // Clears all data in SharedPreferences
-    setState(() {
-      userNameDisplay = null;
-      resultDisplay = '';
-    });
-  }
-}
-
-
-// // shows score and correct and incorrect
+// // // user ko result pani dekhauna ko lagi, displays username, answers and clear data button
 
 // import 'package:flutter/material.dart';
 // import 'package:shared_preferences/shared_preferences.dart';
-// import '../models/question_model.dart';
+// import 'package:trivia_app/main.dart';
 
 // class ResultScreen extends StatefulWidget {
-//   final List<Trivia> triviaList; // Pass the triviaList as a parameter
-//   const ResultScreen({Key? key, required this.triviaList}) : super(key: key);
+//   const ResultScreen({Key? key}) : super(key: key);
+
+//   @override
+//   State<ResultScreen> createState() => _ResultScreenState();
+// }
+
+// class _ResultScreenState extends State<ResultScreen> {
+//   String? userNameDisplay;
+//   String resultDisplay = '';
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     getUserName();
+//     getStringList();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             userNameDisplay == null
+//                 ? Text('Take the quiz first')
+//                 : Text(userNameDisplay!),
+//             resultDisplay.isEmpty
+//                 ? Text('There was an error when showing your results')
+//                 : Text(resultDisplay),
+//             SizedBox(height: 20),
+//             ElevatedButton(
+//               onPressed: clearData,
+//               child: Text('Clear Data'),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   void getUserName() async {
+//     final SharedPreferences pref = await SharedPreferences.getInstance();
+//     userNameDisplay = pref.getString('usersname');
+//     setState(() {
+//       userNameDisplay = pref.getString('usersname');
+//     });
+//   }
+
+//   void getStringList() async {
+//     final SharedPreferences pref = await SharedPreferences.getInstance();
+//     List<String>? selectedOptions = pref.getStringList('selected_options');
+//     resultDisplay = selectedOptions?.join(', ') ?? '';
+//     setState(() {
+//       resultDisplay = selectedOptions?.join(', ') ?? '';
+//     });
+//   }
+
+//   void clearData() async {
+//     final SharedPreferences pref = await SharedPreferences.getInstance();
+//     pref.clear(); // Clears all data in SharedPreferences
+//     setState(() {
+//       userNameDisplay = null;
+//       resultDisplay = '';
+//     });
+//   }
+// }
+
+// // // shows score and correct and incorrect
+
+// import 'package:flutter/material.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:trivia_app/main.dart';
+
+// class ResultScreen extends StatefulWidget {
+//   const ResultScreen({Key? key}) : super(key: key);
 
 //   @override
 //   State<ResultScreen> createState() => _ResultScreenState();
@@ -216,7 +214,7 @@ class _ResultScreenState extends State<ResultScreen> {
 //     resultDisplay = selectedOptions
 //             ?.asMap()
 //             .map((index, option) {
-//               bool isCorrect = option == widget.triviaList[index].correctAnswer;
+//               bool isCorrect = option == triviaList[index].correctAnswer;
 //               if (isCorrect) {
 //                 correctAnswersCount++;
 //               }
@@ -226,14 +224,14 @@ class _ResultScreenState extends State<ResultScreen> {
 //               );
 //             })
 //             .values
-//             .join(', ') ??
+//             .join('\n') ??
 //         '';
 
 //     setState(() {
 //       resultDisplay = selectedOptions
 //               ?.asMap()
 //               .map((index, option) {
-//                 bool isCorrect = option == widget.triviaList[index].correctAnswer;
+//                 bool isCorrect = option == triviaList[index].correctAnswer;
 //                 if (isCorrect) {
 //                   correctAnswersCount++;
 //                 }
@@ -243,7 +241,7 @@ class _ResultScreenState extends State<ResultScreen> {
 //                 );
 //               })
 //               .values
-//               .join(', ') ??
+//               .join('\n') ??
 //           '';
 //     });
 //   }
@@ -259,3 +257,218 @@ class _ResultScreenState extends State<ResultScreen> {
 //     });
 //   }
 // }
+
+// // // shows if the answers are correct or not, but not the score
+
+// import 'package:flutter/material.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+
+// class ResultScreen extends StatefulWidget {
+//   const ResultScreen({Key? key}) : super(key: key);
+
+//   @override
+//   State<ResultScreen> createState() => _ResultScreenState();
+// }
+
+// class _ResultScreenState extends State<ResultScreen> {
+//   String? userNameDisplay;
+//   String resultDisplay = '';
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     getUserName();
+//     getStringList();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: Center(
+//         child: Column(
+//           mainAxisAlignment: MainAxisAlignment.center,
+//           children: [
+//             userNameDisplay == null
+//                 ? Text('Take the Quiz first to View your Results')
+//                 : Text(
+//                     'Hi ' + userNameDisplay! + ', This is Your Quiz Results:'),
+//             resultDisplay.isEmpty ? Text('...results .. here...') : Text(resultDisplay),
+//             SizedBox(height: 20),
+//             ElevatedButton(
+//               onPressed: clearData,
+//               child: Text('Clear Data'),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   void getUserName() async {
+//     final SharedPreferences pref = await SharedPreferences.getInstance();
+//     userNameDisplay = pref.getString('usersname');
+//     setState(() {
+//       userNameDisplay = pref.getString('usersname');
+//     });
+//   }
+
+//   void getStringList() async {
+//     final SharedPreferences pref = await SharedPreferences.getInstance();
+//     List<String>? selectedOptions = pref.getStringList('selected_options');
+//     int correctCount = 0;
+
+//     resultDisplay = selectedOptions?.map((option) {
+//           List<String> parts = option.split(' - ');
+//           if (parts.length == 2) {
+//             String answer = parts[0];
+//             String correctness = parts[1];
+//             if (correctness == 'Correct') {
+//               correctCount++;
+//             }
+//             return '$answer - $correctness';
+//           }
+//           return option;
+//         }).join(', ') ??
+//         '';
+
+//     setState(() {
+//       resultDisplay = selectedOptions?.map((option) {
+//             List<String> parts = option.split(' - ');
+//             if (parts.length == 2) {
+//               String answer = parts[0];
+//               String correctness = parts[1];
+//               if (correctness == 'Correct') {
+//                 correctCount++;
+//               }
+//               return '$answer - $correctness';
+//             }
+//             return option;
+//           }).join(', \n') ??
+//           '';
+//     });
+
+//     print('Correct Count: $correctCount');
+//   }
+
+//   void clearData() async {
+//     final SharedPreferences pref = await SharedPreferences.getInstance();
+//     pref.clear(); // Clears all data in SharedPreferences
+//     setState(() {
+//       userNameDisplay = null;
+//       resultDisplay = '';
+//     });
+//   }
+// }
+
+
+
+// same as before but ui validation
+
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+class ResultScreen extends StatefulWidget {
+  const ResultScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ResultScreen> createState() => _ResultScreenState();
+}
+
+class _ResultScreenState extends State<ResultScreen> {
+  String? userNameDisplay;
+  String resultDisplay = '';
+
+  @override
+  void initState() {
+    super.initState();
+    getUserName();
+    getStringList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: 50),
+                userNameDisplay == null
+                    ? Text('Take the Quiz first to View your Results')
+                    : Text(
+                        'Hi ' + userNameDisplay! + ', This is Your Quiz Results:'),
+                        SizedBox(height: 20),
+                resultDisplay.isEmpty
+                    ? Text('...results .. here...')
+                    : Text(resultDisplay),
+                // SizedBox(height: 20),
+              ],
+            ),
+          ),
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: ElevatedButton(
+            onPressed: clearData,
+            child: Text('Clear Data'),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void getUserName() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    userNameDisplay = pref.getString('usersname');
+    setState(() {
+      userNameDisplay = pref.getString('usersname');
+    });
+  }
+
+  void getStringList() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    List<String>? selectedOptions = pref.getStringList('selected_options');
+
+    resultDisplay = selectedOptions
+            ?.map((option) {
+              List<String> parts = option.split(' - ');
+              if (parts.length == 2) {
+                String answer = parts[0];
+                String correctness = parts[1];
+                return '$answer - $correctness';
+              }
+              return option;
+            })
+            .join(', \n') ??
+        '';
+
+    setState(() {
+      resultDisplay = selectedOptions
+              ?.map((option) {
+                List<String> parts = option.split(' - ');
+                if (parts.length == 2) {
+                  String answer = parts[0];
+                  String correctness = parts[1];
+                  return '$answer - $correctness';
+                }
+                return option;
+              })
+              .join(', \n') ??
+          '';
+    });
+  }
+
+  void clearData() async {
+    final SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.clear(); // Clears all data in SharedPreferences
+    setState(() {
+      userNameDisplay = null;
+      resultDisplay = '';
+    });
+  }
+}
