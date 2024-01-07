@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trivia_app/screens/result_screen.dart';
 
+import 'models/anotherone.dart';
 import 'screens/quiz_screen.dart';
 
 void main() {
@@ -86,7 +87,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const QuizScreen()),
+                            builder: (context) => QuizScreen()),
                       );
                       print('Start button pressed');
                     }
