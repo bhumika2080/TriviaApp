@@ -3,7 +3,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trivia_app/screens/result_screen.dart';
 
 import 'models/anotherone.dart';
-import 'screens/quiz_screen.dart';
 
 void main() {
   runApp(const MyApp());
